@@ -98,9 +98,23 @@ team_mapping = {
     28: 'Venezia',
 }
 
+# Membuat dictionary untuk mapping hasil prediksi
+result_mapping = {
+    0: "Draw",
+    1: "Home Win",
+    2: "Away Win"
+}
+
+# Mengganti hasil prediksi menggunakan mapping
+y_pred_labels = [result_mapping[pred] for pred in y_pred]
+
+# Menampilkan hasil prediksi
+print(y_pred_labels)
+
+
 home_team = dataset.iloc[X_test[:, 0], 0].map(team_mapping).values
 away_team = dataset.iloc[X_test[:, 1], 1].map(team_mapping).values
-result = np.column_stack((home_team, away_team, y_pred))
+result = np.column_stack((home_team, away_team, y_pred_labels))
 
 df_result = pd.DataFrame(result, columns=['Home Team', 'Away Team', 'Result'])
 print(df_result)
@@ -123,7 +137,7 @@ def main():
 def history():
     home_team = dataset.iloc[X_test[:, 0], 0].map(team_mapping).values
     away_team = dataset.iloc[X_test[:, 1], 0].map(team_mapping).values
-    result = np.column_stack((home_team, away_team, y_pred))
+    result = np.column_stack((home_team, away_team, y_pred_labels))
 
     df_result = pd.DataFrame(result, columns=['Home Team', 'Away Team', 'Result'])
     return df_result
