@@ -142,6 +142,9 @@ def main():
     
     # Show historical match results
     st.subheader("Prediksi Histori Match Result")
+    st.text("1 = Home Win")
+    st.text("2 = Away Win")
+    st.text("0 = Draw")
     df_result = history()
     st.dataframe(df_result)
 
