@@ -115,7 +115,7 @@ def main():
     st.write(standings)
     
     # Show historical match results
-    st.subheader("Historical Match Results")
+    st.subheader("History Match Results")
     df_result = history()
     st.dataframe(df_result)
 
