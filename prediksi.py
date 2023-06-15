@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 # Importing the dataset
-data = pd.read_csv('Data_Skripsi_2023.csv', sep=";")
+dataset = pd.read_csv('Data_Skripsi_2023.csv', sep=";")
 
 # Pisahkan kolom target (y) dan atribut (X)
 X = dataset.iloc[:, :-1].values 
