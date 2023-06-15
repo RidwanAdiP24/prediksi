@@ -67,36 +67,35 @@ print (accuracies.mean()*100)
 
 # Dictionary mapping team codes to team name
 team_mapping = {
-    1: 'Roma',
-    2: 'Inter',
+    1: 'Udinese',
+    2: 'Milan',
     3: 'Benevento',
-    4: 'Spal',
+    4: 'Napoli',
     5: 'Genoa',
     6: 'Crotone',
-    7: 'Napoli',
-    8: 'Fiorentina',
-    9: 'Chievo',
+    7: 'Fiorentina',
+    8: 'Lazio',
+    9: 'Inter',
     10: 'Sampdoria',
     11: 'Bologna',
     12: 'Cagliari',
-    13: 'Udinese',
+    13: 'Roma',
     14: 'Sasauolo',
     15: 'Verona',
     16: 'Torino',
-    17: 'Lazio',
-    18: 'Atalanta',
+    17: 'Spal',
+    18: 'Juventus',
     19: 'Parma',
     20: 'Lecce',
     21: 'Empoli',
-    22: 'Juventus',
-    23: 'Milan',
+    22: 'Atalanta',
+    23: 'Chievo',
     24: 'Frosinone',
     25: 'Brescia',
     26: 'Spezia',
     27: 'Salernitana',
     28: 'Venezia',
 }
-
 home_team = dataset.iloc[X_test[:, 0], 0].map(team_mapping).values
 away_team = dataset.iloc[X_test[:, 1], 1].map(team_mapping).values
 result = np.column_stack((home_team, away_team, y_pred))
