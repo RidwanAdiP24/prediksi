@@ -124,12 +124,12 @@ print(df_result)
 def main():
     st.title(" Prediksi Pertandingan")
     # Show final standings
-    st.subheader("Final Standings")
+    st.subheader(" Prediksi Final Standing")
     standings = get_final_standings()
     st.write(standings)
     
     # Show historical match results
-    st.subheader("History Match Results")
+    st.subheader("Prediksi Histori Match Result")
     df_result = history()
     st.dataframe(df_result)
 
