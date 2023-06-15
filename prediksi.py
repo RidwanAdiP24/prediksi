@@ -104,9 +104,6 @@ result = np.column_stack((home_team, away_team, y_pred))
 df_result = pd.DataFrame(result, columns=['Home Team', 'Away Team', 'Result'])
 print(df_result)
 
-from IPython.display import display
-display(df_result)
-
 # Kalkulasi final point by team
 points = {}
 for i in range(len(result)):
