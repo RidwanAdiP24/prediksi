@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.naive_bayes import GaussianNB
 
 # Importing the dataset
 dataset = pd.read_csv('Data_Skripsi_2023.csv', sep=";")
@@ -21,49 +24,12 @@ sc = StandardScaler()
 X_train = sc.fit_transform(X_train) 
 X_test = sc.transform(X_test)
 
-from sklearn.preprocessing import LabelEncoder
-
-# Inisialisasi LabelEncoder
-le = LabelEncoder()
-
-# Mengubah kolom HomeTeam pada kedua dataset menjadi label encoding dengan LabelEncoder yang sama
-X_train[:, 0] = le.fit_transform(X_train[:, 0])
-X_test[:, 0] = le.transform(X_test[:, 0])
-
-# Mengubah kolom AwayTeam pada kedua dataset menjadi label encoding dengan LabelEncoder yang sama
-X_train[:, 1] = le.fit_transform(X_train[:, 1])
-X_test[:, 1] = le.transform(X_test[:, 1])
-
 # Fitting Naive Bayes to the Training set 
-from sklearn.naive_bayes import GaussianNB 
 classifier = GaussianNB() 
 model = classifier.fit(X_train,y_train)
 
 # Prediksi Test set results 
 y_pred = classifier.predict(X_test)
-
-# Kalkulasi final point by team
-points = {}
-for i in range(len(result)):
-    home = result[i][0]
-    away = result[i][1]
-    pred = result[i][2]
-    if home not in points:
-        points[home] = 0
-    if away not in points:
-        points[away] = 0
-    if pred == 0:
-        points[home] += 0
-        points[away] += 3
-    elif pred == 1:
-        points[home] += 1
-        points[away] += 1
-    else:
-        points[home] += 3
-        points[away] += 0
-
-# Sorting teams by points
-sorted_points = sorted(points.items(), key=lambda x: x[1], reverse=True)
 
 # Dictionary mapping team codes to team name
 team_mapping = {
