@@ -5,31 +5,66 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.naive_bayes import GaussianNB
 
-# Importing the dataset
 dataset = pd.read_csv('Data_Skripsi_2023.csv', sep=";")
+print(dataset)
 
 # Pisahkan kolom target (y) dan atribut (X)
-X = dataset.iloc[:, :-1].values 
-y = dataset.iloc[:, -1].values
+X = dataset.iloc[:, :-1].values
+y = dataset.iloc[:,-1].values
 
-# ... (code for preprocessing, model training, and prediction)
-
-# Splitting the dataset into the Training set and Test set 
+# Splitting the dataset into the Training set and Test set
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=0)
 
+#unique_home = np.unique(X[:, 0])
+#print("Jumlah tim pada kolom HomeTeam:", len(unique_home))
+#print("Tim pada kolom HomeTeam:", unique_home)
+
+#unique_away = np.unique(X[:, 1])
+#print("Jumlah tim pada kolom AwayTeam:", len(unique_away))
+#print("Tim pada kolom AwayTeam:", unique_away)
+
 # Feature Scaling
-from sklearn.preprocessing import StandardScaler 
+from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
-X_train = sc.fit_transform(X_train) 
+X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
-# Fitting Naive Bayes to the Training set 
-classifier = GaussianNB() 
+from sklearn.preprocessing import LabelEncoder
+
+# Inisialisasi LabelEncoder
+le = LabelEncoder()
+
+# Mengubah kolom HomeTeam pada kedua dataset menjadi label encoding dengan LabelEncoder yang sama
+X_train[:, 0] = le.fit_transform(X_train[:, 0])
+X_test[:, 0] = le.transform(X_test[:, 0])
+
+# Mengubah kolom AwayTeam pada kedua dataset menjadi label encoding dengan LabelEncoder yang sama
+X_train[:, 1] = le.fit_transform(X_train[:, 1])
+X_test[:, 1] = le.transform(X_test[:, 1])
+
+# Fitting Naive Bayes to the Training set
+from sklearn.naive_bayes import GaussianNB
+classifier = GaussianNB()
 model = classifier.fit(X_train,y_train)
 
-# Prediksi Test set results 
+# Prediksi Test set results
 y_pred = classifier.predict(X_test)
+print(y_pred)
+
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+
+from sklearn.metrics import classification_report
+print(classification_report(y_test, y_pred))
+
+from sklearn.metrics import accuracy_score
+print('Accuracy:', accuracy_score(y_test, y_pred)*100)
+
+from sklearn.model_selection import cross_val_score
+accuracies = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
+print (accuracies.mean()*100)
 
 # Dictionary mapping team codes to team name
 team_mapping = {
@@ -67,19 +102,22 @@ home_team = dataset.iloc[X_test[:, 0], 0].map(team_mapping).values
 away_team = dataset.iloc[X_test[:, 1], 1].map(team_mapping).values
 result = np.column_stack((home_team, away_team, y_pred))
 
+df_result = pd.DataFrame(result, columns=['Home Team', 'Away Team', 'Result'])
+print(df_result)
+
+
 # Define Streamlit app
 def main():
-    st.title("Aplikasi Prediksi Pertandingan")
-
-    # Show historical match results
-    st.subheader("Historical Match Results")
-    df_result = history()
-    st.dataframe(df_result)
-
+    st.title(" Prediksi Pertandingan")
     # Show final standings
     st.subheader("Final Standings")
     standings = get_final_standings()
     st.write(standings)
+    
+    # Show historical match results
+    st.subheader("Historical Match Results")
+    df_result = history()
+    st.dataframe(df_result)
 
 # Function to get historical match results
 def history():
