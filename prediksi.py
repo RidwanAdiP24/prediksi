@@ -3,6 +3,67 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+# Define Streamlit app
+def main():
+    st.title(" Prediksi Pertandingan")
+    st.write("Unggah file CSV dengan format yang sesuai.")
+    
+    # Show file uploader
+    uploaded_file = st.file_uploader("Unggah file CSV", type="csv")
+    
+    if uploaded_file is not None:
+        dataset = pd.read_csv(uploaded_file, sep=";")
+        
+    # Show final standings
+    st.subheader(" Prediksi Final Standing")
+    standings = get_final_standings()
+    st.write(standings)
+    
+    # Show historical match results
+    st.subheader("Prediksi Histori Match Result")
+    st.text("1 = Home Win")
+    st.text("2 = Away Win")
+    st.text("0 = Draw")
+    df_result = history()
+    st.dataframe(df_result)
+
+# Function to get historical match results
+def history():
+    home_team = dataset.iloc[X_test[:, 0], 0].map(team_mapping).values
+    away_team = dataset.iloc[X_test[:, 1], 0].map(team_mapping).values
+    result = np.column_stack((home_team, away_team, y_pred))
+
+    df_result = pd.DataFrame(result, columns=['Home Team', 'Away Team', 'Result'])
+    return df_result
+
+# Function to calculate final standings
+def get_final_standings():
+    points = {}
+    result = history().values
+    for i in range(len(result)):
+        home = result[i][0]
+        away = result[i][1]
+        pred = result[i][2]
+        if home not in points:
+            points[home] = 0
+        if away not in points:
+            points[away] = 0
+        if pred == 0:
+            points[home] += 0
+            points[away] += 3
+        elif pred == 1:
+            points[home] += 1
+            points[away] += 1
+        else:
+            points[home] += 3
+            points[away] += 0
+
+    sorted_points = sorted(points.items(), key=lambda x: x[1], reverse=True)
+    standings = []
+    for i, team in enumerate(sorted_points):
+        standings.append(f"{i+1}. {team[0]} - {team[1]} points ")
+
+    return "\n".join(standings)
 # Import dataset
 #dataset = pd.read_csv('Data_Skripsi_2023.csv', sep=";")
 #print(dataset)
@@ -131,68 +192,6 @@ print("Final Standings:")
 print("Team\tPoints")
 for i in range(len(sorted_points)):
     print(f"{sorted_points[i][0]}\t{sorted_points[i][1]}")
-
-# Define Streamlit app
-def main():
-    st.title(" Prediksi Pertandingan")
-    st.write("Unggah file CSV dengan format yang sesuai.")
-    
-    # Show file uploader
-    uploaded_file = st.file_uploader("Unggah file CSV", type="csv")
-    
-    if uploaded_file is not None:
-        dataset = pd.read_csv(uploaded_file, sep=";")
-        
-    # Show final standings
-    st.subheader(" Prediksi Final Standing")
-    standings = get_final_standings()
-    st.write(standings)
-    
-    # Show historical match results
-    st.subheader("Prediksi Histori Match Result")
-    st.text("1 = Home Win")
-    st.text("2 = Away Win")
-    st.text("0 = Draw")
-    df_result = history()
-    st.dataframe(df_result)
-
-# Function to get historical match results
-def history():
-    home_team = dataset.iloc[X_test[:, 0], 0].map(team_mapping).values
-    away_team = dataset.iloc[X_test[:, 1], 0].map(team_mapping).values
-    result = np.column_stack((home_team, away_team, y_pred))
-
-    df_result = pd.DataFrame(result, columns=['Home Team', 'Away Team', 'Result'])
-    return df_result
-
-# Function to calculate final standings
-def get_final_standings():
-    points = {}
-    result = history().values
-    for i in range(len(result)):
-        home = result[i][0]
-        away = result[i][1]
-        pred = result[i][2]
-        if home not in points:
-            points[home] = 0
-        if away not in points:
-            points[away] = 0
-        if pred == 0:
-            points[home] += 0
-            points[away] += 3
-        elif pred == 1:
-            points[home] += 1
-            points[away] += 1
-        else:
-            points[home] += 3
-            points[away] += 0
-
-    sorted_points = sorted(points.items(), key=lambda x: x[1], reverse=True)
-    standings = []
-    for i, team in enumerate(sorted_points):
-        standings.append(f"{i+1}. {team[0]} - {team[1]} points ")
-
-    return "\n".join(standings)
 
 if __name__ == '__main__':
     main()
