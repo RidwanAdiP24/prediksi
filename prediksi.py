@@ -81,13 +81,6 @@ def main():
         # Prediksi Test set results
         y_pred = classifier.predict(X_test)
 
-        # Print predicted results
-        st.subheader("Prediksi Hasil Pertandingan")
-        result_df = pd.DataFrame({"Home Team": dataset.iloc[X_test[:, 0], 0].map(team_mapping).values,
-                                  "Away Team": dataset.iloc[X_test[:, 1], 0].map(team_mapping).values,
-                                  "Result": y_pred})
-        st.dataframe(result_df)
-
         # Evaluate model
         #st.subheader("Evaluasi Model")
         cm = confusion_matrix(y_test, y_pred)
