@@ -8,8 +8,8 @@ import numpy as np
 #print(dataset)
 # Fungsi untuk membaca file CSV
 def read_csv(file):
-    data = pd.read_csv(file)
-    return data
+    dataset = pd.read_csv(file)
+    return dataset
 
 # Tampilkan tombol unggah file
 uploaded_file = st.file_uploader("Unggah file CSV", type="csv")
@@ -18,7 +18,6 @@ uploaded_file = st.file_uploader("Unggah file CSV", type="csv")
 if uploaded_file is not None:
     data = read_csv(uploaded_file)
     st.write("Data yang diunggah:")
-    st.write(data)
 
 # Pisahkan kolom target (y) dan atribut (X)
 X = dataset.iloc[:, :-1].values
