@@ -89,20 +89,20 @@ def main():
         st.dataframe(result_df)
 
         # Evaluate model
-        st.subheader("Evaluasi Model")
+        #st.subheader("Evaluasi Model")
         cm = confusion_matrix(y_test, y_pred)
-        st.write("Confusion Matrix:")
-        st.write(cm)
-        st.write("Classification Report:")
-        st.write(classification_report(y_test, y_pred))
+        #st.write("Confusion Matrix:")
+        #st.write(cm)
+        #st.write("Classification Report:")
+        #st.write(classification_report(y_test, y_pred))
         accuracy = accuracy_score(y_test, y_pred) * 100
-        st.write(f"Accuracy: {accuracy:.2f}%")
+        #st.write(f"Accuracy: {accuracy:.2f}%")
 
         # Cross Validation
-        st.subheader("Cross Validation")
+        #st.subheader("Cross Validation")
         accuracies = cross_val_score(estimator=classifier, X=X_train, y=y_train, cv=10)
         mean_accuracy = accuracies.mean() * 100
-        st.write(f"Mean Accuracy: {mean_accuracy:.2f}%")
+        #st.write(f"Mean Accuracy: {mean_accuracy:.2f}%")
 
         # Calculate final points by team
         points = {}
@@ -131,7 +131,13 @@ def main():
         st.subheader("Final Standings")
         for i, team in enumerate(sorted_points):
             st.write(f"{i+1}. {team[0]} - {team[1]} points")
-
+        
+        # Print predicted results
+        st.subheader("Prediksi Hasil Pertandingan")
+        result_df = pd.DataFrame({"Home Team": dataset.iloc[X_test[:, 0], 0].map(team_mapping).values,
+                                  "Away Team": dataset.iloc[X_test[:, 1], 0].map(team_mapping).values,
+                                  "Result": y_pred})
+        st.dataframe(result_df)
 
 if __name__ == '__main__':
     main()
