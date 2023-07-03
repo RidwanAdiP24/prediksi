@@ -6,7 +6,16 @@ import numpy as np
 # Import dataset
 #dataset = pd.read_csv('Data_Skripsi_2023.csv', sep=";")
 #print(dataset)
-
+dataset = pd.read_csv(upload_file)
+    st.write("Unggah file CSV dengan format yang sesuai.")
+    
+    # Show file uploader
+    uploaded_file = st.file_uploader("Unggah file CSV", type="csv")
+    
+    if uploaded_file is not None:
+        dataset = pd.read_csv(uploaded_file, sep=";")
+        st.write("Data yang diunggah:")
+        st.write(dataset)
 
 # Pisahkan kolom target (y) dan atribut (X)
 X = dataset.iloc[:, :-1].values
@@ -140,15 +149,6 @@ def main():
     st.subheader(" Prediksi Final Standing")
     standings = get_final_standings()
     st.write(standings)
-    st.write("Unggah file CSV dengan format yang sesuai.")
-    
-    # Show file uploader
-    uploaded_file = st.file_uploader("Unggah file CSV", type="csv")
-    
-    if uploaded_file is not None:
-        dataset = pd.read_csv(uploaded_file, sep=";")
-        st.write("Data yang diunggah:")
-        st.write(dataset)
     
     # Show historical match results
     st.subheader("Prediksi Histori Match Result")
