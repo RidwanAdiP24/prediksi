@@ -7,15 +7,6 @@ import numpy as np
 #dataset = pd.read_csv('Data_Skripsi_2023.csv', sep=";")
 #print(dataset)
 dataset = pd.read_csv(upload_file)
-    st.write("Unggah file CSV dengan format yang sesuai.")
-    
-    # Show file uploader
-    uploaded_file = st.file_uploader("Unggah file CSV", type="csv")
-    
-    if uploaded_file is not None:
-        dataset = pd.read_csv(uploaded_file, sep=";")
-        st.write("Data yang diunggah:")
-        st.write(dataset)
 
 # Pisahkan kolom target (y) dan atribut (X)
 X = dataset.iloc[:, :-1].values
@@ -145,6 +136,14 @@ for i in range(len(sorted_points)):
 # Define Streamlit app
 def main():
     st.title(" Prediksi Pertandingan")
+    st.write("Unggah file CSV dengan format yang sesuai.")
+    
+    # Show file uploader
+    uploaded_file = st.file_uploader("Unggah file CSV", type="csv")
+    
+    if uploaded_file is not None:
+        dataset = pd.read_csv(uploaded_file, sep=";")
+        
     # Show final standings
     st.subheader(" Prediksi Final Standing")
     standings = get_final_standings()
