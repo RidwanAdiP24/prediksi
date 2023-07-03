@@ -6,7 +6,6 @@ import numpy as np
 # Import dataset
 #dataset = pd.read_csv('Data_Skripsi_2023.csv', sep=";")
 #print(dataset)
-dataset = pd.read_csv(upload_file)
 
 # Pisahkan kolom target (y) dan atribut (X)
 X = dataset.iloc[:, :-1].values
