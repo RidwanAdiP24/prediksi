@@ -131,6 +131,9 @@ def main():
         
         # Print predicted results
         st.subheader("Prediksi Hasil Pertandingan")
+        st.text("1 = Home Win")
+        st.text("2 = Away Win")
+        st.text("0 = Draw")
         result_df = pd.DataFrame({"Home Team": dataset.iloc[X_test[:, 0], 0].map(team_mapping).values,
                                   "Away Team": dataset.iloc[X_test[:, 1], 0].map(team_mapping).values,
                                   "Result": y_pred})
