@@ -124,14 +124,14 @@ def main():
         st.dataframe(result_df)
 
         # Evaluate model
-        #st.subheader("Evaluasi Model")
+        st.subheader("Evaluasi Model")
         #cm = confusion_matrix(y_test, y_pred)
         #st.write("Confusion Matrix:")
         #st.write(cm)
         #st.write("Classification Report:")
         #st.write(classification_report(y_test, y_pred))
         accuracy = accuracy_score(y_test, y_pred) * 100
-        #st.write(f"Accuracy: {accuracy:.2f}%")
+        st.write(f"Accuracy: {accuracy:.2f}%")
 
         # Cross Validation
         #st.subheader("Cross Validation")
