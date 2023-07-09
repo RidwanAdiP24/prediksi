@@ -131,7 +131,7 @@ def main():
         #st.write("Classification Report:")
         #st.write(classification_report(y_test, y_pred))
         accuracy = accuracy_score(y_test, y_pred) * 100
-        st.write(f"Accuracy: {accuracy:.2f}%")
+        #st.write(f"Accuracy: {accuracy:.2f}%")
 
         # Cross Validation
         #st.subheader("Cross Validation")
