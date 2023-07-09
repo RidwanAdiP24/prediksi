@@ -127,7 +127,7 @@ def main():
         st.subheader("Evaluasi Model")
         cm = confusion_matrix(y_test, y_pred)
         st.write("Confusion Matrix:")
-        #st.write(cm)
+        st.write(cm)
         st.write("Classification Report:")
         st.write(classification_report(y_test, y_pred))
         accuracy = accuracy_score(y_test, y_pred) * 100
