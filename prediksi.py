@@ -8,7 +8,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 from sklearn.model_selection import cross_val_score
 
-# Dictionary mapping team codes to team name
+# Mapping team 
 team_mapping = {
     1: 'Udinese',
     2: 'Milan',
@@ -45,13 +45,13 @@ def main():
     st.title("Prediksi Pertandingan")
     st.write("Unggah file CSV dengan format yang sesuai.")
 
-    # Show file uploader
+    # File uploader
     uploaded_file = st.file_uploader("Unggah file CSV", type="csv")
 
     if uploaded_file is not None:
         dataset = pd.read_csv(uploaded_file, sep=";")
         
-        # Pisahkan kolom target (y) dan atribut (X)
+        # Pisah kolom label (y) dan atribut (X)
         X = dataset.iloc[:, :-1].values
         y = dataset.iloc[:, -1].values
 
@@ -84,22 +84,6 @@ def main():
         result_df = pd.DataFrame({"Home Team": dataset.iloc[X_test[:, 0], 0].map(team_mapping).values,
                                   "Away Team": dataset.iloc[X_test[:, 1], 0].map(team_mapping).values,
                                   "Result": y_pred})
-
-        # Evaluate model
-        #st.subheader("Evaluasi Model")
-        cm = confusion_matrix(y_test, y_pred)
-        #st.write("Confusion Matrix:")
-        #st.write(cm)
-        #st.write("Classification Report:")
-        #st.write(classification_report(y_test, y_pred))
-        accuracy = accuracy_score(y_test, y_pred) * 100
-        #st.write(f"Accuracy: {accuracy:.2f}%")
-
-        # Cross Validation
-        #st.subheader("Cross Validation")
-        accuracies = cross_val_score(estimator=classifier, X=X_train, y=y_train, cv=10)
-        mean_accuracy = accuracies.mean() * 100
-        #st.write(f"Mean Accuracy: {mean_accuracy:.2f}%")
 
         # Calculate final points by team
         points = {}
@@ -138,6 +122,22 @@ def main():
                                   "Away Team": dataset.iloc[X_test[:, 1], 0].map(team_mapping).values,
                                   "Result": y_pred})
         st.dataframe(result_df)
+
+        # Evaluate model
+        st.subheader("Evaluasi Model")
+        cm = confusion_matrix(y_test, y_pred)
+        st.write("Confusion Matrix:")
+        #st.write(cm)
+        st.write("Classification Report:")
+        st.write(classification_report(y_test, y_pred))
+        accuracy = accuracy_score(y_test, y_pred) * 100
+        st.write(f"Accuracy: {accuracy:.2f}%")
+
+        # Cross Validation
+        st.subheader("Cross Validation")
+        accuracies = cross_val_score(estimator=classifier, X=X_train, y=y_train, cv=10)
+        mean_accuracy = accuracies.mean() * 100
+        st.write(f"Mean Accuracy: {mean_accuracy:.2f}%")
 
 if __name__ == '__main__':
     main()
