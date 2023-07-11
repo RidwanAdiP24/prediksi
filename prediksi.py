@@ -124,7 +124,7 @@ def main():
         st.dataframe(result_df)
 
         # Evaluate model
-        st.subheader("Evaluasi Model")
+        #st.subheader("Evaluasi Model")
         #cm = confusion_matrix(y_test, y_pred)
         #st.write("Confusion Matrix:")
         #st.write(cm)
