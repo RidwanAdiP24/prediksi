@@ -91,19 +91,31 @@ def main():
             home = result_df.iloc[i]["Home Team"]
             away = result_df.iloc[i]["Away Team"]
             pred = result_df.iloc[i]["Result"]
+            for i in range(len(result)):
             if home not in points:
                 points[home] = 0
             if away not in points:
                 points[away] = 0
             if pred == 0:
-                points[home] += 0
-                points[away] += 3
-            elif pred == 1:
                 points[home] += 1
                 points[away] += 1
-            else:
+            elif pred == 1:
                 points[home] += 3
-                points[away] += 0
+            else:
+                points[away] += 3
+          #  if home not in points:
+           #     points[home] = 0
+            #if away not in points:
+            #    points[away] = 0
+            #if pred == 0:
+            #   points[home] += 0
+            #   points[away] += 3
+            #elif pred == 1:
+             #   points[home] += 1
+              #  points[away] += 1
+            #else:
+             #   points[home] += 3
+              #  points[away] += 0
 
         # Sorting teams by points
         sorted_points = sorted(points.items(), key=lambda x: x[1], reverse=True)
