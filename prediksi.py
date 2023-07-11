@@ -91,7 +91,6 @@ def main():
             home = result_df.iloc[i]["Home Team"]
             away = result_df.iloc[i]["Away Team"]
             pred = result_df.iloc[i]["Result"]
-            for i in range(len(result)):
             if home not in points:
                 points[home] = 0
             if away not in points:
