@@ -106,6 +106,9 @@ def main():
             else:
                 points[home] += 3
                 points[away] += 0
+                if away not in team_wins:
+                    team_wins[away] = 0
+                team_wins[away] += 1
 
         # Sorting teams by points
         sorted_points = sorted(points.items(), key=lambda x: x[1], reverse=True)
