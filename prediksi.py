@@ -128,7 +128,7 @@ def main():
         # Print final standings
         st.subheader("Final Standings")
         for i, (team, team_points) in enumerate(sorted_points):
-            for team, wins in team_percentage.items():
+            team, wins in team_percentage.items():
                 st.write(f"{i+1}. {team} - {team_points} points - {wins:.2f}%")
         
         # Print predicted results
