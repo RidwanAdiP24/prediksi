@@ -111,9 +111,9 @@ def main():
         sorted_points = sorted(points.items(), key=lambda x: x[1], reverse=True)
 
         # Print final standings
-        st.subheader("Final Standings")
+        #st.subheader("Final Standings")
         for i, team in enumerate(sorted_points):
-            st.write(f"{i+1}. {team[0]} - {team[1]} points")
+        #    st.write(f"{i+1}. {team[0]} - {team[1]} points")
         
         # Calculate team win percentage
         total_matches = len(result_df)
@@ -121,11 +121,11 @@ def main():
         team_percentage = (team_wins / total_matches) * 100
 
         # Print team win percentage
-        st.subheader("Persentase Kemenangan Tim")
+        #st.subheader("Persentase Kemenangan Tim")
         for team, wins in team_percentage.items():
-            st.write(f"{team} - {wins:.2f}%")
+        #    st.write(f"{team} - {wins:.2f}%")
             
-        st.subheader("PPP")
+        st.subheader("Final Standings Serie A")
         for i, (team, points) in enumerate(sorted_points):
             wins = team_wins.get(team, 0)
             win_percentage = (wins / total_matches) * 100
