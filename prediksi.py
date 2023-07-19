@@ -112,19 +112,18 @@ def main():
         team_wins = result_df[result_df['Result'] == 1]['Home Team'].value_counts().add(result_df[result_df['Result'] == 2]['Away Team'].value_counts(), fill_value=0)
         team_percentage = (team_wins / total_matches) * 100
 
-        # Add extra points based on win percentage
-        for team, wins in team_percentage.items():
-            extra_points = (wins / 100) * 10  # Adjust the multiplier as needed
-            points[team] += extra_points
-
         # Sorting teams by points
         sorted_points = sorted(points.items(), key=lambda x: x[1], reverse=True)
 
-        # Print final standings with percentage
-        st.subheader("Final Standings with Win Percentage")
-        for i, (team, points) in enumerate(sorted_points):
-            wins = team_wins[team]
-            st.write(f"{i+1}. {team} - {points:.2f} points (Win Percentage: {wins:.2f}%)")
+        # Print final standings
+        st.subheader("Final Standings")
+        for i, team in enumerate(sorted_points):
+            st.write(f"{i+1}. {team[0]} - {team[1]} points - ({wins:.2f}%)")
+
+        # Print team win percentage
+        st.subheader("Persentase Kemenangan Tim")
+        for team, wins in team_percentage.items():
+            st.write(f"{team} - {wins:.2f}%")
         
         # Print predicted results
         st.subheader("Prediksi Hasil Pertandingan")
