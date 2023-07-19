@@ -116,9 +116,9 @@ def main():
             st.write(f"{i+1}. {team[0]} - {team[1]} points")
         
         # Calculate team win percentage
-        #total_matches = len(result_df)
-        #team_wins = result_df[result_df['Result'] == 1]['Home Team'].value_counts().add(result_df[result_df['Result'] == 2]['Away Team'].value_counts(), fill_value=0)
-        #team_percentage = (team_wins / total_matches) * 100
+        total_matches = len(result_df)
+        team_wins = result_df[result_df['Result'] == 1]['Home Team'].value_counts().add(result_df[result_df['Result'] == 2]['Away Team'].value_counts(), fill_value=0)
+        team_percentage = (team_wins / total_matches) * 100
 
         # Print team win percentage
         #st.subheader("Persentase Kemenangan Tim")
