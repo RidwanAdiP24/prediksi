@@ -43,7 +43,8 @@ team_mapping = {
 # Define Streamlit app
 def main():
     st.title("Prediksi Klasemen dan Pertandingan Pada Liga Serie A")
-    st.write("Format yang digunakan yaitu : HT, AT, FTHG, FTAG, HTHG, HTAG, HS, AS, HST, AST, HF, AF, HC, AC, HY, AY, HR, AR dan FTR")
+    st.write("Format yang digunakan yaitu :")
+    st.write("HT, AT, FTHG, FTAG, HTHG, HTAG, HS, AS, HST, AST, HF, AF, HC, AC, HY, AY, HR, AR dan FTR")
     st.write("Unggah file CSV dengan format yang sesuai.")
 
     # File uploader
