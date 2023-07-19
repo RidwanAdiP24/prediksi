@@ -128,7 +128,7 @@ def main():
         # Print final standings
         st.subheader("Final Standings")
         for i, (team, team_points) in enumerate(sorted_points):
-            team, wins in team_percentage.items():
+            wins = (team_points / (team_matches[team] * 3)) * 100
                 st.write(f"{i+1}. {team} - {team_points} points - {wins:.2f}%")
         
         # Print predicted results
