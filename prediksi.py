@@ -112,7 +112,7 @@ def main():
 
         # Print final standings
         #st.subheader("Final Standings")
-        for i, team in enumerate(sorted_points):
+        #for i, team in enumerate(sorted_points):
         #    st.write(f"{i+1}. {team[0]} - {team[1]} points")
         
         # Calculate team win percentage
@@ -122,7 +122,7 @@ def main():
 
         # Print team win percentage
         #st.subheader("Persentase Kemenangan Tim")
-        for team, wins in team_percentage.items():
+        #for team, wins in team_percentage.items():
         #    st.write(f"{team} - {wins:.2f}%")
             
         st.subheader("Final Standings Serie A")
