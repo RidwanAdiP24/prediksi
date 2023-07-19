@@ -118,7 +118,7 @@ def main():
             points[team] += extra_points
             
         # Sorting teams by points
-        sorted_points = sorted(points.items(), key=lambda x: x[1], reverse=True)
+        sorted_points = sorted(points.items(), key=lambda x: x[1],team_percentage[x[0]]), reverse=True)
 
         # Print final standings
         st.subheader("Final Standings")
