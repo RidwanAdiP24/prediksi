@@ -124,6 +124,12 @@ def main():
         st.subheader("Persentase Kemenangan Tim")
         for team, wins in team_percentage.items():
             st.write(f"{team} - {wins:.2f}%")
+            
+        st.subheader("PPP")
+        for i, (team, points) in enumerate(sorted_points):
+            wins = team_wins.get(team, 0)
+            win_percentage = (wins / total_matches) * 100
+            st.write(f"{i+1}. {team} - {points} points ({win_percentage:.2f}% wins)")
         
         # Print predicted results
         st.subheader("Prediksi Hasil Pertandingan")
