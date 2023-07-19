@@ -89,6 +89,8 @@ def main():
 
         # Calculate final points by team
         points = {}
+        team_wins = {}
+        total_matches = len(result_df)
         for i in range(len(result_df)):
             home = result_df.iloc[i]["Home Team"]
             away = result_df.iloc[i]["Away Team"]
@@ -103,6 +105,9 @@ def main():
             elif pred == 1:
                 points[home] += 1
                 points[away] += 1
+                if home not in team_wins:
+                    team_wins[home] = 0
+                team_wins[home] += 1
             else:
                 points[home] += 3
                 points[away] += 0
