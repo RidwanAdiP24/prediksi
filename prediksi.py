@@ -129,7 +129,7 @@ def main():
         for i, (team, points) in enumerate(sorted_points):
             wins = team_wins.get(team, 0)
             win_percentage = (wins / total_matches) * 100
-            st.write(f"{i+1}. {team} - {points} points - ({win_percentage:.2f}% wins)")
+            st.write(f"{i+1}. {team} - {points} points")
         #({win_percentage:.2f}% wins)
         # Print predicted results
         st.subheader("Prediksi Hasil Pertandingan")
